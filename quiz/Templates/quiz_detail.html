@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ quiz.title }}</title>
+</head>
+<body>
+    <h1>{{ quiz.title }}</h1>
+    <ul>
+        {% for question in quiz.questions.all %}
+            <li>{{ question.text }}</li>
+            <ul>
+                {% for choice in question.choices.all %}
+                    <li>{{ choice.text }} {% if choice.is_correct %}(Correct){% endif %}</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'create_choice' question.id %}">Add choice</a>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_question' quiz.id %}">Add question</a>
+</body>
+</html>
